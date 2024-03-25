@@ -1,3 +1,4 @@
+import 'package:checkip/network/network_request.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -56,6 +57,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
+  String ip = '';
 
   void _incrementCounter() {
     setState(() {
@@ -116,7 +118,10 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
+        onPressed: () async {
+          ip = await NetworkResquest().fetchYourIP();
+          print(ip);
+        },
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
