@@ -1,3 +1,4 @@
+import 'package:checkip/model/ip.dart';
 import 'package:checkip/network/network_request.dart';
 import 'package:flutter/material.dart';
 
@@ -121,6 +122,9 @@ class _MyHomePageState extends State<MyHomePage> {
         onPressed: () async {
           ip = await NetworkResquest().fetchYourIP();
           print(ip);
+          print("HHEHEH");
+          IP ip1 = await NetworkResquest().fetchIPinfo(ip);
+          print(ip1.loc);
         },
         tooltip: 'Increment',
         child: const Icon(Icons.add),
