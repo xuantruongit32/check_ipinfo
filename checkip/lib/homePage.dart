@@ -1,3 +1,4 @@
+import 'package:checkip/infoPage.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:flutter/services.dart';
@@ -64,7 +65,8 @@ class HomePage extends StatelessWidget {
                   ),
                 ),
               ),
-            )
+            ),
+            InfoPage(ip: controller.text),
           ],
         ),
       ),

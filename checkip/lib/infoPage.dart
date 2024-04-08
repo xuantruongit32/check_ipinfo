@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 class InfoPage extends StatefulWidget {
   const InfoPage({super.key, required this.ip});
-  final String ip;
+  final String? ip;
 
   @override
   State<InfoPage> createState() => _InfoPageState();
@@ -11,20 +11,29 @@ class InfoPage extends StatefulWidget {
 
 class _InfoPageState extends State<InfoPage> {
   late var ipinfo;
+  void fetchIpInfo() async {
+    ipinfo = await NetworkResquest().fetchIPinfo(widget.ip!);
+    setState(() {});
+  }
+
   @override
-  void initState() async {
-    ipinfo = await NetworkResquest().fetchIPinfo(widget.ip);
+  void initState() {
+    if (widget.ip != '') {
+      fetchIpInfo();
+    }
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Text(ipinfo.city!),
-        Text(ipinfo.region!),
-        Text(ipinfo.country!),
-      ],
-    );
+    return widget.ip == ''
+        ? Container()
+        : Column(
+            children: [
+              Text(ipinfo.city!),
+              Text(ipinfo.region!),
+              Text(ipinfo.country!),
+            ],
+          );
   }
 }
