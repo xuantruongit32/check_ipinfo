@@ -66,6 +66,10 @@ class HomePage extends StatelessWidget {
                 ),
               ),
             ),
+            TextButton(
+              onPressed: () {},
+              child: const Text('Search'),
+            ),
             InfoPage(ip: controller.text),
           ],
         ),
