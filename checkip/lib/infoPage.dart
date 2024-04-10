@@ -14,9 +14,9 @@ class _InfoPageState extends State<InfoPage> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Text(widget.ipinfo.city ?? 'Unknown City'),
-        Text(widget.ipinfo.region ?? 'Unknown Region'),
-        Text(widget.ipinfo.country ?? 'Unknown Country'),
+        Text('City: ${widget.ipinfo.city ?? "Unknown City"}'),
+        Text('Region: ${widget.ipinfo.region ?? "Unknown Region"}'),
+        Text('Location: ${widget.ipinfo.loc ?? "Unknown Location"}'),
       ],
     );
   }

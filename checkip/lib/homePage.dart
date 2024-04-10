@@ -28,7 +28,11 @@ class _HomePageState extends State<HomePage> {
     }
 
     Future<void> fetchIpInfo() async {
-      IP fetchedIpInfo = await NetworkResquest().fetchIPinfo(widget.ip);
+      setState(() {
+        ipinfo = IP();
+      });
+
+      IP fetchedIpInfo = await NetworkResquest().fetchIPinfo(controller.text);
       setState(() {
         ipinfo = fetchedIpInfo;
       });
