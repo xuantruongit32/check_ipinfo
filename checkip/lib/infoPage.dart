@@ -1,39 +1,23 @@
-import 'package:checkip/network/network_request.dart';
+import 'package:checkip/model/ip.dart';
 import 'package:flutter/material.dart';
 
 class InfoPage extends StatefulWidget {
-  const InfoPage({super.key, required this.ip});
-  final String? ip;
+  const InfoPage({super.key, required this.ipinfo});
+  final IP ipinfo;
 
   @override
   State<InfoPage> createState() => _InfoPageState();
 }
 
 class _InfoPageState extends State<InfoPage> {
-  late var ipinfo;
-  void fetchIpInfo() async {
-    ipinfo = await NetworkResquest().fetchIPinfo(widget.ip!);
-    setState(() {});
-  }
-
-  @override
-  void initState() {
-    if (widget.ip != '') {
-      fetchIpInfo();
-    }
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
-    return widget.ip == ''
-        ? Container()
-        : Column(
-            children: [
-              Text(ipinfo.city!),
-              Text(ipinfo.region!),
-              Text(ipinfo.country!),
-            ],
-          );
+    return Column(
+      children: [
+        Text(widget.ipinfo.city ?? 'Unknown City'),
+        Text(widget.ipinfo.region ?? 'Unknown Region'),
+        Text(widget.ipinfo.country ?? 'Unknown Country'),
+      ],
+    );
   }
 }

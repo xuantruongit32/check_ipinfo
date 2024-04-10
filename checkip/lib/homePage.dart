@@ -1,11 +1,20 @@
 import 'package:checkip/infoPage.dart';
+import 'package:checkip/model/ip.dart';
+import 'package:checkip/network/network_request.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:flutter/services.dart';
 
-class HomePage extends StatelessWidget {
-  const HomePage({super.key, required this.ip});
+class HomePage extends StatefulWidget {
+  HomePage({super.key, required this.ip});
   final String ip;
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  IP ipinfo = IP();
 
   @override
   Widget build(BuildContext context) {
@@ -16,6 +25,13 @@ class HomePage extends StatelessWidget {
           text: text,
         ),
       );
+    }
+
+    Future<void> fetchIpInfo() async {
+      IP fetchedIpInfo = await NetworkResquest().fetchIPinfo(widget.ip);
+      setState(() {
+        ipinfo = fetchedIpInfo;
+      });
     }
 
     return Scaffold(
@@ -33,7 +49,7 @@ class HomePage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  ip,
+                  widget.ip,
                   style: const TextStyle(
                     fontSize: 36,
                     fontWeight: FontWeight.bold,
@@ -42,7 +58,7 @@ class HomePage extends StatelessWidget {
                 const Gap(10),
                 GestureDetector(
                   onTap: () {
-                    copyTextToClipBoard(ip, context);
+                    copyTextToClipBoard(widget.ip, context);
                   },
                   child: const Icon(Icons.copy),
                 ),
@@ -66,11 +82,15 @@ class HomePage extends StatelessWidget {
                 ),
               ),
             ),
-            TextButton(
-              onPressed: () {},
+            ElevatedButton(
+              onPressed: () {
+                fetchIpInfo();
+              },
               child: const Text('Search'),
             ),
-            InfoPage(ip: controller.text),
+            InfoPage(
+              ipinfo: ipinfo,
+            ),
           ],
         ),
       ),
