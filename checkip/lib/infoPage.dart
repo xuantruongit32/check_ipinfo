@@ -12,12 +12,35 @@ class InfoPage extends StatefulWidget {
 class _InfoPageState extends State<InfoPage> {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Text('City: ${widget.ipinfo.city ?? "Unknown City"}'),
-        Text('Region: ${widget.ipinfo.region ?? "Unknown Region"}'),
-        Text('Location: ${widget.ipinfo.loc ?? "Unknown Location"}'),
-      ],
+    return Card(
+      child: Column(
+        children: [
+          ListTile(
+            title: Text('IP: ${widget.ipinfo.ip ?? "Unknown IP"}'),
+          ),
+          ListTile(
+            title: Text('City: ${widget.ipinfo.city ?? "Unknown City"}'),
+          ),
+          ListTile(
+            title: Text('Region: ${widget.ipinfo.region ?? "Unknown Region"}'),
+          ),
+          ListTile(
+            title: Text('Country: ${widget.ipinfo.country ?? "Unknown Country"}'),
+          ),
+          ListTile(
+            title: Text('Location: ${widget.ipinfo.loc ?? "Unknown Location"}'),
+          ),
+          ListTile(
+            title: Text('Org: ${widget.ipinfo.org ?? "Unknown Org"}'),
+          ),
+          ListTile(
+            title: Text('Postal: ${widget.ipinfo.postal ?? "Unknown Postal"}'),
+          ),
+          ListTile(
+            title: Text('TimeZone: ${widget.ipinfo.timezone ?? "Unknown TimeZone"}'),
+          ),
+        ],
+      ),
     );
   }
 }
