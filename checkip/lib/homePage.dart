@@ -40,62 +40,67 @@ class _HomePageState extends State<HomePage> {
 
     return Scaffold(
       body: SafeArea(
-        child: Column(
-          children: [
-            const Gap(40),
-            const Center(
-              child: Text(
-                'Your IP Address:',
-                style: TextStyle(fontSize: 36, fontWeight: FontWeight.bold),
-              ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  widget.ip,
-                  style: const TextStyle(
-                    fontSize: 36,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                const Gap(10),
-                GestureDetector(
-                  onTap: () {
-                    copyTextToClipBoard(widget.ip, context);
-                  },
-                  child: const Icon(Icons.copy),
-                ),
-              ],
-            ),
-            Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: Container(
-                padding: const EdgeInsets.all(8),
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.white),
-                ),
-                child: TextField(
-                  textAlign: TextAlign.center,
-                  keyboardType: const TextInputType.numberWithOptions(),
-                  controller: controller,
-                  decoration: const InputDecoration(
-                    border: InputBorder.none,
-                    hintText: 'SEARCH IP INFO',
-                  ),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              const Gap(40),
+              const Center(
+                child: Text(
+                  'Your IP Address:',
+                  style: TextStyle(fontSize: 36, fontWeight: FontWeight.bold),
                 ),
               ),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                fetchIpInfo();
-              },
-              child: const Text('Search'),
-            ),
-            InfoPage(
-              ipinfo: ipinfo,
-            ),
-          ],
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    widget.ip,
+                    style: const TextStyle(
+                      fontSize: 36,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const Gap(10),
+                  GestureDetector(
+                    onTap: () {
+                      copyTextToClipBoard(widget.ip, context);
+                    },
+                    child: const Icon(Icons.copy),
+                  ),
+                ],
+              ),
+              Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Container(
+                  padding: const EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.white),
+                  ),
+                  child: TextField(
+                    textAlign: TextAlign.center,
+                    keyboardType: const TextInputType.numberWithOptions(),
+                    controller: controller,
+                    decoration: const InputDecoration(
+                      border: InputBorder.none,
+                      hintText: 'SEARCH IP INFO',
+                    ),
+                  ),
+                ),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  fetchIpInfo();
+                },
+                child: const Text(
+                  'Search',
+                ),
+              ),
+              const Gap(50),
+              InfoPage(
+                ipinfo: ipinfo,
+              ),
+            ],
+          ),
         ),
       ),
     );

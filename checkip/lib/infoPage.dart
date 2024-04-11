@@ -1,5 +1,6 @@
 import 'package:checkip/model/ip.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class InfoPage extends StatefulWidget {
   const InfoPage({super.key, required this.ipinfo});
@@ -15,31 +16,49 @@ class _InfoPageState extends State<InfoPage> {
     return Card(
       child: Column(
         children: [
-          ListTile(
-            title: Text('IP: ${widget.ipinfo.ip ?? "Unknown IP"}'),
+          _buildListTile(
+            'IP: ${widget.ipinfo.ip ?? "Unknown IP"}',
           ),
-          ListTile(
-            title: Text('City: ${widget.ipinfo.city ?? "Unknown City"}'),
+          _buildListTile(
+            'City: ${widget.ipinfo.city ?? "Unknown City"}',
           ),
-          ListTile(
-            title: Text('Region: ${widget.ipinfo.region ?? "Unknown Region"}'),
+          _buildListTile(
+            'Region: ${widget.ipinfo.region ?? "Unknown Region"}',
           ),
-          ListTile(
-            title: Text('Country: ${widget.ipinfo.country ?? "Unknown Country"}'),
+          _buildListTile(
+            'Country: ${widget.ipinfo.country ?? "Unknown Country"}',
           ),
-          ListTile(
-            title: Text('Location: ${widget.ipinfo.loc ?? "Unknown Location"}'),
+          _buildListTile(
+            'Location: ${widget.ipinfo.loc ?? "Unknown Location"}',
           ),
-          ListTile(
-            title: Text('Org: ${widget.ipinfo.org ?? "Unknown Org"}'),
+          _buildListTile(
+            'Org: ${widget.ipinfo.org ?? "Unknown Org"}',
           ),
-          ListTile(
-            title: Text('Postal: ${widget.ipinfo.postal ?? "Unknown Postal"}'),
+          _buildListTile(
+            'Postal: ${widget.ipinfo.postal ?? "Unknown Postal"}',
           ),
-          ListTile(
-            title: Text('TimeZone: ${widget.ipinfo.timezone ?? "Unknown TimeZone"}'),
+          _buildListTile(
+            'TimeZone: ${widget.ipinfo.timezone ?? "Unknown TimeZone"}',
           ),
         ],
+      ),
+    );
+  }
+
+  ListTile _buildListTile(String title) {
+    final splitTitle = title.split(':');
+    final copiedContent = splitTitle.length > 1 ? splitTitle[1].trim() : '';
+    return ListTile(
+      title: Text(title),
+      trailing: IconButton(
+        icon: const Icon(
+          Icons.content_copy,
+        ),
+        onPressed: () {
+          Clipboard.setData(
+            ClipboardData(text: copiedContent),
+          );
+        },
       ),
     );
   }
