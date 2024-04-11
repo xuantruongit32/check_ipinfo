@@ -87,6 +87,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
               ),
+              const Gap(10),
               ElevatedButton(
                 onPressed: () {
                   fetchIpInfo();
@@ -95,7 +96,7 @@ class _HomePageState extends State<HomePage> {
                   'Search',
                 ),
               ),
-              const Gap(50),
+              const Gap(10),
               InfoPage(
                 ipinfo: ipinfo,
               ),
